@@ -29,6 +29,7 @@ ipcMain.handle('ipc-get-version', async (event, arg) => {
         version: process.versions.chrome
     })
     for (const v of input.support) {
+        console.log(input)
         for (const vendor of input.vendor[v]) {
             list.push({
                 name: `${vendor} can`,

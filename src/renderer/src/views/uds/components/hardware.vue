@@ -282,17 +282,25 @@ function buildTree() {
     }
     t.push(kvaser)
     addSubTree('kvaser', kvaser)
-    const simulate: tree = {
-        label: 'Simulate',
-        vendor: 'simulate',
-        append: false,
-        id: 'Simulate',
+    // const simulate: tree = {
+    //     label: 'Simulate',
+    //     vendor: 'simulate',
+    //     append: false,
+    //     id: 'Simulate',
 
+    //     children: []
+    // }
+    // t.push(simulate)
+    // addSubTree('simulate', simulate)
+    const candapter: tree = {
+        label: 'CANDapter',
+        vendor: 'candapter',
+        append: false,
+        id: 'CANDapter',
         children: []
     }
-    t.push(simulate)
-    addSubTree('simulate', simulate)
-
+    t.push(candapter)
+    addSubTree('candapter', candapter)
 
     tData.value = t
 }

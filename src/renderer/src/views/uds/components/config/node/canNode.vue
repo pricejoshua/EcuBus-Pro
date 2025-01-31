@@ -228,13 +228,13 @@ const gridOptions = computed(() => {
       autoClear: true
     },
     columns: [
-      { field: 'clock', title: 'Clock', minWidth: 180, visible: configInfo[props.vendor].clock, editRender: {}, slots: { edit: 'edit_clock', default: 'default_clock' } },
-      { field: 'freq', title: 'Frequency', minWidth: 180, visible: configInfo[props.vendor].freq, editRender: {}, slots: { edit: 'edit_freq' } },
-      { field: 'timeSeg1', title: 'TSEG1', width: 180, visible: configInfo[props.vendor].timeSeg1, editRender: {}, slots: { edit: 'edit_timeSeg1' } },
-      { field: 'timeSeg2', title: 'TSEG2', width: 180, visible: configInfo[props.vendor].timeSeg2, editRender: {}, slots: { edit: 'edit_timeSeg2' } },
-      { field: 'sjw', title: 'SJW', width: 180, visible: configInfo[props.vendor].sjw, editRender: {}, slots: { edit: 'edit_sjw' } },
-      { field: 'preScaler', title: 'Pre Scaler', width: 180, visible: configInfo[props.vendor].preScaler, editRender: {}, slots: { edit: 'edit_preScaler' } },
-      { field: 'zlgSpec', title: 'ZLG Spec', minWidth: 300, visible: configInfo[props.vendor].zlgSpec, editRender: {}, slots: { edit: 'edit_zlg' } },
+      // { field: 'clock', title: 'Clock', minWidth: 180, visible: configInfo[props.vendor].clock, editRender: {}, slots: { edit: 'edit_clock', default: 'default_clock' } },
+      // { field: 'freq', title: 'Frequency', minWidth: 180, visible: configInfo[props.vendor].freq, editRender: {}, slots: { edit: 'edit_freq' } },
+      // { field: 'timeSeg1', title: 'TSEG1', width: 180, visible: configInfo[props.vendor].timeSeg1, editRender: {}, slots: { edit: 'edit_timeSeg1' } },
+      // { field: 'timeSeg2', title: 'TSEG2', width: 180, visible: configInfo[props.vendor].timeSeg2, editRender: {}, slots: { edit: 'edit_timeSeg2' } },
+      // { field: 'sjw', title: 'SJW', width: 180, visible: configInfo[props.vendor].sjw, editRender: {}, slots: { edit: 'edit_sjw' } },
+      // { field: 'preScaler', title: 'Pre Scaler', width: 180, visible: configInfo[props.vendor].preScaler, editRender: {}, slots: { edit: 'edit_preScaler' } },
+      // { field: 'zlgSpec', title: 'ZLG Spec', minWidth: 300, visible: configInfo[props.vendor].zlgSpec, editRender: {}, slots: { edit: 'edit_zlg' } },
       { field: 'baudrate', title: 'Baudrate/Sample Point', align: 'center', minWidth: 250, slots: { default: 'default_baudrate' } }
     ],
     data: tableList.value,
@@ -354,7 +354,7 @@ const nameCheck = (rule: any, value: any, callback: any) => {
 };
 
 const bitrateCheck = (rule: any, value: any, callback: any) => {
-  if (props.vendor == "peak" || props.vendor == 'kvaser') {
+  if (props.vendor == "peak" || props.vendor == 'kvaser' || props.vendor == 'candapter') {
     if (data.value.bitrate.clock == undefined) {
       callback(new Error("Please select clock"));
     }

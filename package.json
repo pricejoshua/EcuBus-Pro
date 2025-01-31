@@ -14,7 +14,8 @@
       "can": [
         "kvaser",
         "peak",
-        "zlg"
+        "zlg",
+        "candapter"
       ]
     }
   },
@@ -73,7 +74,6 @@
     "events": "^3.3.0",
     "glob": "^11.0.0",
     "handlebars": "^4.7.8",
-    "java": "^0.14.0",
     "jquery": "^3.7.1",
     "jquery-ui": "^1.14.1",
     "json5": "^2.2.3",

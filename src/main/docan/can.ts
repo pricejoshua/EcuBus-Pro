@@ -28,7 +28,7 @@ export function openCanDevice(canDevice: CanBaseInfo) {
         canBase = new KVASER_CAN(canDevice)
     } else if (canDevice.vendor == 'simulate') {
         canBase = new SIMULATE_CAN(canDevice)
-    } else if (canDevice.vendor == 'candapter') {
+    } else if (canDevice.vendor == 'Ewert Energy') {
         canBase = new CANDAPTER_CAN(canDevice)
     }
 
