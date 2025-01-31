@@ -5,6 +5,7 @@ import path from "path";
 import { ZLG_CAN } from "./zlg";
 import { KVASER_CAN } from "./kvaser";
 import { SIMULATE_CAN } from "./simulate";
+import { CANDAPTER_CAN } from "./candapter";
 import { CanBase, CanBaseInfo } from "../share/can";
 
 
@@ -27,6 +28,8 @@ export function openCanDevice(canDevice: CanBaseInfo) {
         canBase = new KVASER_CAN(canDevice)
     } else if (canDevice.vendor == 'simulate') {
         canBase = new SIMULATE_CAN(canDevice)
+    } else if (canDevice.vendor == 'candapter') {
+        canBase = new CANDAPTER_CAN(canDevice)
     }
 
     return canBase
@@ -44,6 +47,8 @@ export function getCanVersion(vendor: string) {
         return KVASER_CAN.getLibVersion()
     } else if (vendor === 'SIMULATE') {
         return SIMULATE_CAN.getLibVersion()
+    } else if (vendor === 'CANDAPTER') {
+        return CANDAPTER_CAN.getLibVersion()
     }
     else
     // #v-endif
@@ -64,6 +69,8 @@ export function getCanDevices(vendor: string) {
         return KVASER_CAN.getValidDevices()
     } else if (vendor === 'SIMULATE') {
         return SIMULATE_CAN.getValidDevices()
+    } else if (vendor === 'CANDAPTER') {
+        return CANDAPTER_CAN.getValidDevices()
     }
     else
     // #v-endif
