@@ -14,19 +14,24 @@ export class CANDAPTER_CAN extends CanBase {
         super();
         this.info = info;
         this.event = new EventEmitter();
+        console.log(info);
         
-        const libDir = path.join(__dirname, 'lib');
+        const libDir = path.join(process.cwd(), 'src', 'main', 'docan', 'candapter', 'lib');
+        console.log('libDir:', libDir);
         this.proc = spawn('java', [
             '-cp', 
-            `${libDir}/EECanbus.jar${path.delimiter}${libDir}/jSerialComm-2.11.0.jar`,
-            'CandapterServer'  // main class name
+            `${libDir}/EECanbus.jar${path.delimiter}${libDir}/jSerialComm-2.11.0.jar${path.delimiter}${libDir}/gson-2.12.1.jar`,
+            'canbus.CandapterServer'  // main class name
         ], {
             stdio: ['pipe', 'pipe', 'pipe']
-        });;
+        });
+        
+        console.log('proc:', this.proc);
 
         // handle responses
         this.proc.stdout.on('data', (data: Buffer) => {
             const msgs = data.toString().split('\n').filter(Boolean);
+            console.log('received:', msgs);
             for (const msg of msgs) {
                 try {
                     const parsed = JSON.parse(msg);
@@ -58,12 +63,27 @@ export class CANDAPTER_CAN extends CanBase {
                 }
             }
         });
+        
+        this.proc.stderr.on('data', (data: Buffer) => {
+            console.error('stderr:', data.toString());
+        });
+
+        this.proc.on('exit', (code: number) => {
+            console.error('process exited:', code);
+        });
+
+        this.proc.on('error', (err: Error) => {
+            console.error('process error:', err);
+        });
+
+        this.send('open', { port: "COM13" });
     }
 
     private async send(cmd: string, data: any = null): Promise<any> {
         const id = this.msgId++;
         const promise = new Promise(resolve => this.msgQueue.set(id, resolve));
         this.proc.stdin.write(JSON.stringify({ id, cmd, data }) + '\n');
+        console.log('sent:', JSON.stringify({ id, cmd, data }));
         return promise;
     }
 
